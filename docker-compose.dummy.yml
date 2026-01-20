@@ -1,0 +1,21 @@
+services:
+    silverbullet:
+        image: ghcr.io/silverbulletmd/silverbullet:latest
+        container_name: silverbullet-dummy
+        restart: unless-stopped
+
+        environment:
+            - SB_USER=${USERNAME?}:${PASSWORD?}
+        networks:
+            - traefik-public
+        volumes:
+            - ./space:/space
+
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.silverbullet.rule=Host(`silverbullet.localhost`)
+            - traefik.http.routers.silverbullet.entrypoints=web
+
+networks:
+    traefik-public:
+        external: true
