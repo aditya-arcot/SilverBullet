@@ -4,12 +4,10 @@ services:
         container_name: silverbullet
         restart: unless-stopped
 
-        environment:
-            - SB_USER=${USERNAME?}:${PASSWORD?}
         networks:
             - traefik-public
         volumes:
-            - ./space:/space
+            - ./data:/data
 
         labels:
             - traefik.enable=true
